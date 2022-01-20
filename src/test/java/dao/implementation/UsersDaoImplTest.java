@@ -32,8 +32,8 @@ class UsersDaoImplTest {
         user.setAddress(address);
         user.setFirst_name("Youssef");
         user.setLast_name("Diouani");
-        user.setEmail("Youssef@gmail.com");
-        user.setPassword("123456789");
+        user.setEmail("admin@gmail.com");
+        user.setPassword("admin");
         System.out.println(address);
         System.out.println(role);
         user = new UsersDaoImpl().add(user);
@@ -63,11 +63,11 @@ class UsersDaoImplTest {
         Users user = new UsersDaoImpl().find(id);
 
 
+        user.setFirst_name("update");
+        user.setLast_name("update");
+        user.setEmail("admin@gmail.com");
+        user.setPassword("admin");
 
-        user.setFirst_name("Duiyabu");
-        user.setLast_name("Youssef");
-        user.setEmail("Youssef123@gmail.com");
-        user.setPassword("123456789");
         user = new UsersDaoImpl().update(user);
         assertInstanceOf(Users.class, user);
 

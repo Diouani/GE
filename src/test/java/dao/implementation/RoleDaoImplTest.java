@@ -2,6 +2,7 @@ package dao.implementation;
 
 import entity.Address;
 import entity.Role;
+import entity.Users;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -18,13 +19,14 @@ class RoleDaoImplTest {
     @Test
     @Order(2)
     void find() {
+        assertInstanceOf(Role.class, new RoleDaoImpl().find(id));
     }
 
     @Test
     @Order(3)
     void getAll() {
 
-        assertInstanceOf(new ArrayList<Address>().getClass(), new RoleDaoImpl().getAll());
+        assertInstanceOf(new ArrayList<Role>().getClass(), new RoleDaoImpl().getAll());
     }
 
     @Test
@@ -33,17 +35,17 @@ class RoleDaoImplTest {
         Role role = new Role();
         role.setName("Test");
         role = new RoleDaoImpl().add(role);
-        assertInstanceOf(Address.class, role);
+        assertInstanceOf(Role.class, role);
         this.id = role.getId_role();
     }
 
     @Test
     @Order(4)
     void update() {
-        Role role = new Role();
+        Role role = new RoleDaoImpl().find(id);
         role.setName("TestUpdate");
         role = new RoleDaoImpl().update(role);
-        assertInstanceOf(Address.class, role);
+        assertInstanceOf(Role.class, role);
 
     }
 

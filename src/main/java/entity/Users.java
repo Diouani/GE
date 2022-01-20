@@ -1,14 +1,18 @@
 package entity;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 @Entity
+@DynamicUpdate
 @Table(schema = "public",name = "Users")
 public class Users {
 
-    @NotNull
+@NotNull
 @Id
 @Column(name = "user_id", nullable = false)
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +32,11 @@ public class Users {
 @Column(name = "password")
     private String password;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "id_address", referencedColumnName = "id_address")
+    @OneToOne()
+    @JoinColumn(name = "id_address", referencedColumnName = "id_address", unique = false)
     private Address address;
 
-    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "id_role",unique = false,referencedColumnName = "id_role")
     private Role role;
 
@@ -89,6 +93,10 @@ public class Users {
         this.role = role;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
@@ -97,10 +105,8 @@ public class Users {
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", password='" + password + '\'' +
+                ", address=" + address +
+                ", role=" + role +
                 '}';
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

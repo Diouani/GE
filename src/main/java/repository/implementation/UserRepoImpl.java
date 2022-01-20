@@ -1,7 +1,11 @@
 package repository.implementation;
 
 import Hibernate.HibernateFactory;
+import dao.implementation.AddressDaoImpl;
+import dao.implementation.RoleDaoImpl;
 import dao.implementation.UsersDaoImpl;
+import entity.Address;
+import entity.Role;
 import entity.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -61,12 +65,24 @@ session.close();
 
     @Override
     public Users add(Users user) {
+       if(user.getAddress().getIdAddress() == null){
+           Address addressNoId = user.getAddress();
+           Address address = new AddressDaoImpl().add(addressNoId);
+           user.setAddress(address);
+       }
+        System.out.println(user);
+       if(user.getRole().getName() == null){
+          Role role = new RoleDaoImpl().find(user.getRole().getId_role());
+          user.setRole(role);
+           System.out.println(user);
+       }
         return userDao.add(user);
 
     }
 
     @Override
     public Users update(Users user) {
+
         return userDao.update(user);
     }
 

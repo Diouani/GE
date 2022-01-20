@@ -7,15 +7,15 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_role", nullable = false)
-    private Integer id_role;
+    private long id_role;
     @Column(name = "name")
     private String name;
 
-    public Integer getId_role() {
+    public long getId_role() {
         return id_role;
     }
 
-    public void setId_role(Integer id_role) {
+    public void setId_role(long id_role) {
         this.id_role = id_role;
     }
 
