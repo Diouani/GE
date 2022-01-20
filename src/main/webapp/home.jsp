@@ -10,8 +10,13 @@
 
 </head>
 <h1 class="mb-3" >Users List
+
 </h1>
-<buttton style="float:right" class="btn btn-danger mb-5"><a href="${pageContext.servletContext.contextPath}/Logout">Logout</a></buttton>
+<div style="display: flex;flex-direction: row-reverse">
+    <button style="margin-left: 10px" class="btn btn-danger mb-5"><a style="text-decoration: none; color: white" href="${pageContext.servletContext.contextPath}/Logout">Logout</a></button>
+    <button style="" class="btn btn-primary mb-5"><a style="text-decoration: none; color: white" href="${pageContext.servletContext.contextPath}/add">Add User</a></button>
+</div>
+
 
 
 
@@ -50,7 +55,7 @@
     </table>
 
 
-<a class=" btn btn-primary mt-3" style="float: right" href="${pageContext.servletContext.contextPath}/add">Add User</a>
+
 </body>
 </html>
 <% }else {

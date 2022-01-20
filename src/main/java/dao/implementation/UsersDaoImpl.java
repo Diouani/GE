@@ -24,7 +24,7 @@ public class UsersDaoImpl implements UserDao {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("GestionEmployee");
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
-        Users user =  entityManager.find(Users.class,id);
+        Users user = entityManager.find(Users.class, id);
         entityManager.persist(user);
 
         entityManager.getTransaction().commit();
@@ -34,13 +34,13 @@ public class UsersDaoImpl implements UserDao {
 
     @Override
     public ArrayList<Users> getAll() {
-      try(Session session = HibernateFactory.getInstance().getSession().openSession()){
-          session.beginTransaction();
-          Query query = session.createQuery("from Users ");
-          ArrayList user = (ArrayList) query.list();
+        try (Session session = HibernateFactory.getInstance().getSession().openSession()) {
+            session.beginTransaction();
+            Query query = session.createQuery("from Users ");
+            ArrayList user = (ArrayList) query.list();
 
-          return user;
-      }
+            return user;
+        }
 
     }
 
@@ -57,22 +57,22 @@ public class UsersDaoImpl implements UserDao {
 
     @Override
     public Users update(Users user) {
-    Session session = HibernateFactory.getInstance().getSession().openSession();
+        Session session = HibernateFactory.getInstance().getSession().openSession();
 
-            session.beginTransaction();
-            session.find(Users.class,user.getUserId());
+        session.beginTransaction();
+        session.find(Users.class, user.getUserId());
         Address address = user.getAddress();
         String queryString = "update Users User set User.address=:address where User.userId=:Id";
         Query query = session.createQuery(queryString);
         query.setParameter("address", address);
-        query.setParameter("Id",user.getUserId());
+        query.setParameter("Id", user.getUserId());
         query.executeUpdate();
 
-            System.out.println("is it herrrrrrrrrrrrrreeeeeeeeeeeeeee !!!!!!!!!!!!!!!!!!!");
-            session.merge(user);
-            session.getTransaction().commit();
 
-     session.close();
+        session.merge(user);
+        session.getTransaction().commit();
+
+        session.close();
 
         return user;
     }
@@ -93,7 +93,7 @@ public class UsersDaoImpl implements UserDao {
 
         entityManager.getTransaction().begin();
 
-        Users user = entityManager.find(Users.class,id);
+        Users user = entityManager.find(Users.class, id);
         entityManager.remove(user);
 
         entityManager.getTransaction().commit();

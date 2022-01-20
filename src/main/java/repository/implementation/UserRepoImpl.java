@@ -82,7 +82,10 @@ session.close();
 
     @Override
     public Users update(Users user) {
-
+        if(user.getRole().getName() == null){
+          Role role = new RoleDaoImpl().find(user.getRole().getId_role()) ;
+          user.setRole(role);
+        }
         return userDao.update(user);
     }
 

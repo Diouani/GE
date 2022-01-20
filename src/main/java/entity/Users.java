@@ -5,39 +5,38 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 @Entity
 @DynamicUpdate
-@Table(schema = "public",name = "Users")
+@Table(schema = "public", name = "Users")
 public class Users {
 
-@NotNull
-@Id
-@Column(name = "user_id", nullable = false)
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @Id
+    @Column(name = "user_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
-@NotNull(message = "email doesn't take a null value")
-@Email
-@Column(name = "email")
+    @NotNull(message = "email doesn't take a null value")
+    @Email
+    @Column(name = "email")
     private String email;
-@NotNull(message = "first_name doesn't take a null value")
-@Column(name = "first_name")
+    @NotNull(message = "first_name doesn't take a null value")
+    @Column(name = "first_name")
     private String first_name;
-@NotNull(message = "last_name doesn't take a null value")
-@Column(name = "last_name")
+    @NotNull(message = "last_name doesn't take a null value")
+    @Column(name = "last_name")
     private String last_name;
-@NotNull(message = "password doesn't take a null value")
-@Column(name = "password")
+    @NotNull(message = "password doesn't take a null value")
+    @Column(name = "password")
     private String password;
 
     @OneToOne()
     @JoinColumn(name = "id_address", referencedColumnName = "id_address", unique = false)
     private Address address;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinColumn(name = "id_role",unique = false,referencedColumnName = "id_role")
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "id_role", unique = false, referencedColumnName = "id_role")
     private Role role;
 
 

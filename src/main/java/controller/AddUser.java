@@ -5,22 +5,24 @@ import entity.Address;
 import entity.Role;
 import entity.Users;
 import service.implementation.AddressServiceImpl;
-import service.implementation.RoleServiceImpl;
 import service.implementation.UsersServiceImpl;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "AddUser",  urlPatterns={"/add", "/update"})
+@WebServlet(name = "AddUser", urlPatterns = {"/add", "/update"})
 public class AddUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        if(session.getAttribute("UserId") != null) {
+        if (session.getAttribute("UserId") != null) {
             String path = request.getServletPath();
 
             ArrayList<Role> roles = new RoleDaoImpl().getAll();
@@ -44,14 +46,13 @@ public class AddUser extends HttpServlet {
                     break;
             }
 
-        }else{
+        } else {
             response.sendRedirect("/");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String email = request.getParameter("email");
         String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");
@@ -62,9 +63,6 @@ public class AddUser extends HttpServlet {
         String street = request.getParameter("street");
         Users user = new Users();
         Address address = new Address();
-
-
-
         Role roleObject = new Role();
         roleObject.setId_role(role);
         user.setEmail(email);
@@ -77,25 +75,22 @@ public class AddUser extends HttpServlet {
         user.setRole(roleObject);
         System.out.println(address);
         System.out.println(roleObject);
-     if(request.getServletPath().equals("/update") )  {
-         Long idUser = Long.parseLong(request.getParameter("idUser"));
-         user.setUserId(idUser);
-         Long idAddress = Long.parseLong(request.getParameter("idAddress"));
-         address.setIdAddress(idAddress);
-      Address address1 = new AddressServiceImpl().update(address);
-         System.out.println(address1);
-       user.setAddress(address1);
-         System.out.println(user);
-         new UsersServiceImpl().update(user) ;
-         System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
-     }else{
-         System.out.println("????????????????????????????????? ");
-         user.setAddress(address);
-         new UsersServiceImpl().add(user);
-     }
+        if (request.getServletPath().equals("/update")) {
+            Long idUser = Long.parseLong(request.getParameter("idUser"));
+            user.setUserId(idUser);
+            Long idAddress = Long.parseLong(request.getParameter("idAddress"));
+            address.setIdAddress(idAddress);
+            Address address1 = new AddressServiceImpl().update(address);
+            System.out.println(address1);
+            user.setAddress(address1);
+            System.out.println(user);
+            new UsersServiceImpl().update(user);
+        } else {
+            user.setAddress(address);
+            new UsersServiceImpl().add(user);
+        }
 
         response.sendRedirect("/home");
-
 
 
     }
