@@ -28,6 +28,7 @@ public class UsersDaoImpl implements UserDao {
         entityManager.persist(user);
 
         entityManager.getTransaction().commit();
+        entityManager.close();
 
         return user;
     }

@@ -26,6 +26,7 @@ public class AddressDaoImpl implements AddressDao {
         Address address = session.get(Address.class,id);
         session.close();
         return address;
+
     }
 
     @Override
