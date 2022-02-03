@@ -9,7 +9,7 @@
         <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
-    <root id="archive" name="GE-1.0-SNAPSHOT.war">
+    <root id="archive" name="Docker-GE.war">
       <element id="artifact" artifact-name="GE:war exploded" />
     </root>
   </artifact>

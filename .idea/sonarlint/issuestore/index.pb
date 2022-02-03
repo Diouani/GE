@@ -1,10 +1,6 @@
 
 V
 &src/main/java/repository/RoleRepo.java,8\5\85b349cf35a7b104bee18c0a3aeda0bf76aa8084
-e
-5src/test/java/dao/implementation/RoleDaoImplTest.java,6\b\6b6d31abd6b69fef14b788fb6892174528d1d0d6
-h
-8src/test/java/dao/implementation/AddressDaoImplTest.java,4\d\4d38152b02354d1448b2ebdbcb650394d0987d39
 V
 &src/main/java/service/RoleService.java,0\0\00cc11e282b0155e78c91b5b832e7a50492c1290
 W
