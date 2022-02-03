@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-               'mvn --version'
-               'mvn clean install'
+               sh 'mvn --version'
+               sh 'mvn clean install'
             }
         }
     }
